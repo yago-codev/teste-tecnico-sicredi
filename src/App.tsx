@@ -1,11 +1,16 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
+import { BrowserRouter as Router } from 'react-router-dom';
+
+import { Routes } from 'routes';
 
 import { light, GlobalStyles } from 'styles';
 
 export const App: React.FC = () => (
   <ThemeProvider theme={light}>
-    <h1>App</h1>
-    <GlobalStyles />
+    <Router>
+      <Routes />
+      <GlobalStyles />
+    </Router>
   </ThemeProvider>
 );
