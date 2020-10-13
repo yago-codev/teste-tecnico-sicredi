@@ -71,6 +71,12 @@ export const DragonDetailsInputContainer = styled.div`
     }
   }
 
+  &:nth-child(3) {
+    input {
+      cursor: not-allowed;
+    }
+  }
+
   > span {
     margin-left: 16px;
     margin-bottom: 8px;
