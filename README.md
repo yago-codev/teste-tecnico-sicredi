@@ -1,44 +1,116 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Teste Técnico Sicredi
 
-## Available Scripts
+### Sobre o projeto:
 
-In the project directory, you can run:
+Aplicação desenvolvida de acordo com os requisitos técnicos
+solicitados para a avaliação do cargo de desenvolvedor React no Sicredi.
 
-### `yarn start`
+### Objetivo do projeto:
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Desenvolver uma interface gráfica para consumir a seguinte [API](http://5c4b2a47aa8ee500142b4887.mockapi.io/api/v1/dragon).
+- A aplicação deve possuir 4 páginas:
+  - **Login**:
+    - Única página disponível se o usuário não estiver logado;
+    - Criar um usuário básico para acesso (optei por desenvolver uma API de autenticação);
+  - **Listagem de dragões**:
+    - Os nomes devem ser ordenados alfabeticamente;
+    - A partir da página de lista, deverá ser possível remover e alterar as informações das entidades;
+  - **Detalhes do dragão (os seguintes dados devem ser apresentados)**:
+    - Nome;
+    - Tipo;
+    - Data de criação;
+  - **Criação de dragão**.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### Ferramentas necessárias para executar aplicação:
 
-### `yarn test`
+> O projeto está subdividido em duas pastas distintas:
+> back: API de autenticação.
+> front: Client para autenticação e consumo da API de dragões.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+> Utilizei o Yarn para o gerenciamento de pacotes,
+> caso não possua ele em sua máquina,
+> acesse esse [link](https://classic.yarnpkg.com/en/docs/install/#mac-stable).
 
-### `yarn build`
+> A API de autenticação foi implementada com Docker,
+> caso não possua ele em sua máquina,
+> acesse esse [link](https://www.docker.com/get-started).
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+> O ORM da API de autenticação foi configurado para
+> conectar-se a uma base de dados chamada "api-auth".
+> Essa base de dados poderá ser criado com
+> qualquer "GUI Client" de banco de dados.
+> Eu utilizo o Postbird,
+> caso não possua ele em sua máquina,
+> acesse esse [link](https://www.electronjs.org/apps/postbird).
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+### Comandos para executar a aplicação:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Estando com o Docker instalado,
+rode o seguinte comando:
 
-### `yarn eject`
+```
+docker run --name api-auth -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Abra seu "GUI Client".
+As seguintes credenciais de acesso foram
+setadas no ORM e devem ser utilizadas para
+conectar ao banco de dados através do "GUI Client":
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+username: postgres
+password: docker
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Agora utilize seu "GUI Client" para criar uma database chamada:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```
+api-auth
+```
 
-## Learn More
+Pronto,
+a configuração do banco de dados está concluída,
+agora entre na pasta da aplicação através do terminal e
+navegue até o diretório "back":
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+cd back
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Instale as dependências:
+
+```
+yarn
+```
+
+Inicie o servidor que
+foi previamente configurado para responder
+através do "http://localhost:3333":
+
+```
+yarn dev
+```
+
+Agora em outra aba do terminal,
+entre na pasta "front":
+
+```
+cd front
+```
+
+Instale as dependências:
+
+```
+yarn
+```
+
+Inicie o servidor:
+
+```
+yarn start
+```
+
+Caso ocorra algum erro durante o processo,
+verifique se todas as etapas mencionadas acima
+foram cumpridas corretamente.
+Certifique-se de estar com as portas 3333 e 3000 livres.
