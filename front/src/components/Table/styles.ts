@@ -215,6 +215,7 @@ export const TableBody = styled.tbody`
 
       @media (max-width: 420px) {
         width: 33.3%;
+        padding: 8px;
 
         &:nth-child(2) {
           border-top-left-radius: 8px;
