@@ -1,6 +1,12 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useRouteMatch, Link } from 'react-router-dom';
-import { FiEdit, FiFeather, FiBookOpen, FiArrowLeft } from 'react-icons/fi';
+import {
+  FiEdit,
+  FiFeather,
+  FiBookOpen,
+  FiArrowLeft,
+  FiCalendar,
+} from 'react-icons/fi';
 import { ToastContainer, toast } from 'react-toastify';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
@@ -12,7 +18,7 @@ import {
   createDragon,
   updateDragon,
 } from 'services/dragons';
-import { getValidationErrors } from 'utils';
+import { getValidationErrors, dateConverter } from 'utils';
 
 import { Layout, Input, TextArea, Button } from 'components';
 
@@ -122,6 +128,16 @@ export const DragonDetails: React.FC = () => {
                   iconSize={20}
                   icon={FiFeather}
                   placeholder={dragon?.type}
+                />
+              </DragonDetailsInputContainer>
+
+              <DragonDetailsInputContainer>
+                <span>Data de criação</span>
+                <Input
+                  name="createdAt"
+                  iconSize={20}
+                  icon={FiCalendar}
+                  value={dragon && dateConverter(dragon.createdAt)}
                 />
               </DragonDetailsInputContainer>
             </DragonDetailsContentContainer>
