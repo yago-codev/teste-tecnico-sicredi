@@ -231,10 +231,15 @@ export const TableBody = styled.tbody`
         &:nth-child(4) {
           display: none;
         }
-      }
 
-      .second-button {
-        padding: 8px 10px;
+        .first-button,
+        .second-button {
+          padding: 8px 10px;
+
+          svg {
+            margin-right: 4px !important;
+          }
+        }
       }
     }
   }
