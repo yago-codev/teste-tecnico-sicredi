@@ -46,7 +46,7 @@ solicitados para a avaliação do cargo de desenvolvedor React no Sicredi.
 ### Comandos para executar a aplicação:
 
 Estando com o Docker instalado,
-rode o seguinte comando:
+rode o seguinte comando em seu terminal:
 
 ```
 docker run --name api-auth -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
