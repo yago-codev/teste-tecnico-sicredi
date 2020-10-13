@@ -131,15 +131,17 @@ export const DragonDetails: React.FC = () => {
                 />
               </DragonDetailsInputContainer>
 
-              <DragonDetailsInputContainer>
-                <span>Data de criação</span>
-                <Input
-                  name="createdAt"
-                  iconSize={20}
-                  icon={FiCalendar}
-                  value={dragon && dateConverter(dragon.createdAt)}
-                />
-              </DragonDetailsInputContainer>
+              {params.id && (
+                <DragonDetailsInputContainer>
+                  <span>Data de criação</span>
+                  <Input
+                    name="createdAt"
+                    iconSize={20}
+                    icon={FiCalendar}
+                    value={dragon && dateConverter(dragon.createdAt)}
+                  />
+                </DragonDetailsInputContainer>
+              )}
             </DragonDetailsContentContainer>
 
             <DragonDetailsContentContainer>
