@@ -1,0 +1,21 @@
+export const light = {
+  title: 'light',
+  colors: {
+    primary: '#221ECC',
+    secondary: '#8885A9',
+    tertiary: '#9B9FB5',
+    quaternary: '#F5F5FA',
+    quinary: '#EFF0F5',
+    black: '#2A2935',
+    white: '#FFFFFF',
+    greenPrimary: '#34A62D',
+    greenSecondary: '#D2F3D3',
+    redPrimary: '#d63031',
+    redSecondary: '#ff7675',
+    brown: '#F78E68',
+    gray: '#757891',
+    graySecondary: '#FAFAFC',
+    purplePrimary: '#D4CEF8',
+    purpleSecondary: '#E8E5FC',
+  },
+};
