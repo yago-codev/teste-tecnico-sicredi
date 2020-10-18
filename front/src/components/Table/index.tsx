@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 
 import { IDragons, deleteDragon } from 'services/dragons';
-import { dateConverter } from 'utils';
 
 import { Modal } from 'components';
 
@@ -112,7 +111,7 @@ export const Table: React.FC<ITableProps> = ({
                   <td>{content.id}</td>
                   <td>{content.name}</td>
                   <td>{content.type}</td>
-                  <td>{dateConverter(content.createdAt)}</td>
+                  <td>{content.formattedDate}</td>
                   <td>
                     <button className="first-button">
                       <Link to={`/dragon/${content.id}`}>

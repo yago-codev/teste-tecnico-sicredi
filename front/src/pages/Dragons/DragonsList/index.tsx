@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { FiPlus } from 'react-icons/fi';
 
 import { IDragons, getDragons } from 'services/dragons';
+import { dateConverter } from 'utils';
 
 import { Layout, Table } from 'components';
 
@@ -10,7 +11,11 @@ export const DragonsList: React.FC = () => {
 
   const fetchData = useCallback(async () => {
     try {
-      const data = (await getDragons()).data;
+      const response = (await getDragons()).data;
+      const data = response.map(dragon => ({
+        ...dragon,
+        formattedDate: dateConverter(dragon.createdAt)
+      }));
       setDragons(data);
     } catch (e) {
       console.error(e);
