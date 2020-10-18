@@ -49,7 +49,8 @@ export const DragonDetails: React.FC = () => {
   const [dragon, setDragon] = useState<IDragons>();
 
   const fetchData = useCallback(async () => {
-    const data = (await getDragon(params.id)).data;
+    const response = (await getDragon(params.id)).data;
+    const data = {...response, formattedDate: dateConverter(response.createdAt)};
     setDragon(data);
   }, [params]);
 
@@ -138,7 +139,7 @@ export const DragonDetails: React.FC = () => {
                     name="createdAt"
                     iconSize={20}
                     icon={FiCalendar}
-                    value={dragon && dateConverter(dragon.createdAt)}
+                    value={dragon && dragon.formattedDate}
                   />
                 </DragonDetailsInputContainer>
               )}
