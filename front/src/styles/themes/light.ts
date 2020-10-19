@@ -17,5 +17,6 @@ export const light = {
     graySecondary: '#FAFAFC',
     purplePrimary: '#D4CEF8',
     purpleSecondary: '#E8E5FC',
+    ice: '#F2F8FC',
   },
 };

@@ -20,6 +20,7 @@ declare module 'styled-components' {
       graySecondary: string;
       purplePrimary: string;
       purpleSecondary: string;
+      ice: string;
     };
   }
 }
