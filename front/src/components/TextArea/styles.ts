@@ -12,7 +12,7 @@ interface ITextAreaError {
 
 export const TextAreaContainer = styled.div<ITextAreaContainer>`
   width: 100%;
-  height: 96px;
+  height: 136px;
   display: flex;
   align-items: center;
   background: ${(props) => props.theme.colors.quaternary};
