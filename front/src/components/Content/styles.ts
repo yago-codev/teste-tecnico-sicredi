@@ -9,6 +9,11 @@ export const ContentContainer = styled.div`
   overflow-y: scroll;
   overflow-x: hidden;
 
+  @media (max-width: 420px) {
+    height: calc(100vh - 140px);
+    border-radius: 0;
+  }
+
   &::-webkit-scrollbar {
     width: 10px;
   }
@@ -20,9 +25,5 @@ export const ContentContainer = styled.div`
 
   &::-webkit-scrollbar-track {
     background-color: ${(props) => props.theme.colors.graySecondary};
-  }
-
-  @media (max-width: 420px) {
-    border-radius: 0;
   }
 `;
