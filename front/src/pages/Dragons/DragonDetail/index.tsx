@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { useRouteMatch, Link } from 'react-router-dom';
 import {
   FiEdit,
@@ -87,6 +87,10 @@ export const DragonDetails: React.FC = () => {
     [params.id],
   );
 
+  const checkParamIdForTheButton = useMemo(() => params.id ? 'Atualizar' : 'Criar', [params.id]);
+
+  const checkParamIdForTheTitle = useMemo(() => params.id ? 'Editar' : 'Criar', [params.id]);
+
   return (
     <>
       <ToastContainer
@@ -108,7 +112,7 @@ export const DragonDetails: React.FC = () => {
 
         <DragonDetailsContainer>
           <DragonTitleContainer>
-            <h2>{params.id ? 'Editar' : 'Criar'} Dragão</h2>
+          <h2>{checkParamIdForTheTitle} Dragão</h2>
           </DragonTitleContainer>
           <Form onSubmit={handleSubmit} ref={formRef}>
             <DragonDetailsContentContainer>
@@ -139,7 +143,7 @@ export const DragonDetails: React.FC = () => {
                     name="createdAt"
                     iconSize={20}
                     icon={FiCalendar}
-                    value={dragon && dragon.formattedDate}
+                    value={dragon?.formattedDate}
                   />
                 </DragonDetailsInputContainer>
               )}
@@ -158,7 +162,9 @@ export const DragonDetails: React.FC = () => {
             </DragonDetailsContentContainer>
 
             <DragonDetailsContentContainer>
-              <Button type="submit">{params.id ? 'Atualizar' : 'Criar'}</Button>
+              <Button type="submit">
+                {checkParamIdForTheButton}
+              </Button>
             </DragonDetailsContentContainer>
           </Form>
         </DragonDetailsContainer>

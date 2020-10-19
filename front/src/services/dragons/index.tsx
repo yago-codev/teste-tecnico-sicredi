@@ -10,7 +10,7 @@ export interface IDragons {
   type: string;
   histories: string[];
   createdAt: Date;
-  formattedDate: any;
+  formattedDate: string;
 }
 
 export const getDragons: () => AxiosPromise<IDragons[]> = () =>
