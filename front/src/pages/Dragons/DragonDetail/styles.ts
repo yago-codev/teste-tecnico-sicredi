@@ -74,6 +74,7 @@ export const DragonDetailsInputContainer = styled.div`
   &:nth-child(3) {
     input {
       cursor: not-allowed;
+      color: ${props => props.theme.colors.secondary};
     }
   }
 
