@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, useCallback, useState } from 'react';
+import React, { HTMLAttributes, useCallback, useState, useMemo } from 'react';
 import { IconBaseProps } from 'react-icons';
 import { FiFilter, FiEye, FiTrash } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
@@ -41,6 +41,7 @@ export const Table: React.FC<ITableProps> = ({
   fetchData,
 }) => {
   const [openModal, setOpenModal] = useState(false);
+  const [dragonDeletedId, setDragonDeletedId] = useState('');
 
   const handleClickDeleteDragon = useCallback(
     async (id?: string) => {
@@ -57,9 +58,23 @@ export const Table: React.FC<ITableProps> = ({
     [fetchData],
   );
 
-  const handleClickVerifyModal = useCallback(() => {
+  const verifyRenderModal = useMemo(() =>
+    openModal &&
+      <Modal
+        key={dragonDeletedId}
+        message="Você tem certeza que deseja excluir o dragão?"
+        action={() => handleClickDeleteDragon(dragonDeletedId)}
+        handleClickVerifyModal={() => handleClickVerifyModal()}
+      />,
+  [openModal, dragonDeletedId, handleClickDeleteDragon]);
+
+  const handleClickVerifyModal = useCallback((id?: string) => {
     openModal ? setOpenModal(false) : setOpenModal(true);
-  }, [openModal]);
+
+    setDragonDeletedId(id!);
+
+    return verifyRenderModal;
+  }, [openModal, verifyRenderModal]);
 
   return (
     <>
@@ -124,7 +139,7 @@ export const Table: React.FC<ITableProps> = ({
                   <td>
                     <button
                       className="second-button"
-                      onClick={handleClickVerifyModal}
+                      onClick={() => handleClickVerifyModal(content.id)}
                     >
                       <FiTrash />
                       Deletar
@@ -135,17 +150,7 @@ export const Table: React.FC<ITableProps> = ({
           </TableBody>
         </TableContent>
       </TableContainer>
-      {bodyContent.map(
-        (content) =>
-          openModal && (
-            <Modal
-              key={content.id}
-              message="Você tem certeza que deseja excluir o dragão?"
-              action={() => handleClickDeleteDragon(content.id)}
-              handleClickVerifyModal={handleClickVerifyModal}
-            />
-          ),
-      )}
+      {verifyRenderModal}
     </>
   );
 };
