@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { FiPlus } from 'react-icons/fi';
 
 import { IDragons, getDragons } from 'services/dragons';
@@ -26,7 +26,7 @@ export const DragonsList: React.FC = () => {
     fetchData();
   }, [fetchData]);
 
-  const headerTitles = ['ID', 'Nome', 'Tipo', 'Data de criação', '', ' '];
+  const headerTitles = useMemo(() => ['ID', 'Nome', 'Tipo', 'Data de criação', '', ' '], []);
 
   const filter = useCallback(
     (e) => {
