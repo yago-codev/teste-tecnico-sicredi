@@ -4,19 +4,22 @@ import { FiPlus } from 'react-icons/fi';
 import { IDragons, getDragons } from 'services/dragons';
 import { dateConverter } from 'utils';
 
-import { Layout, Table } from 'components';
+import { Layout, Table, Loader } from 'components';
 
 export const DragonsList: React.FC = () => {
   const [dragons, setDragons] = useState<IDragons[]>([]);
+  const [loading, setLoading] = useState(false);
 
   const fetchData = useCallback(async () => {
     try {
+      setLoading(true);
       const response = (await getDragons()).data;
       const data = response.map(dragon => ({
         ...dragon,
         formattedDate: dateConverter(dragon.createdAt)
       }));
       setDragons(data);
+      setLoading(false);
     } catch (e) {
       console.error(e);
     }
@@ -41,7 +44,11 @@ export const DragonsList: React.FC = () => {
     [dragons, fetchData],
   );
 
+  const verifyLoading = useMemo(() => loading && <Loader />, [loading]);
+
   return (
+    <>
+    {verifyLoading}
     <Layout>
       <Table
         headerTitles={headerTitles}
@@ -53,5 +60,6 @@ export const DragonsList: React.FC = () => {
         fetchData={fetchData}
       />
     </Layout>
+    </>
   );
 };

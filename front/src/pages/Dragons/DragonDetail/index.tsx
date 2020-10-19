@@ -20,7 +20,7 @@ import {
 } from 'services/dragons';
 import { getValidationErrors, dateConverter } from 'utils';
 
-import { Layout, Input, TextArea, Button } from 'components';
+import { Layout, Input, TextArea, Button, Loader } from 'components';
 
 import {
   DragonBackLinkContainer,
@@ -47,11 +47,14 @@ export const DragonDetails: React.FC = () => {
   const { params } = useRouteMatch<IDetailsParams>();
   const formRef = useRef<FormHandles>(null);
   const [dragon, setDragon] = useState<IDragons>({} as IDragons);
+  const [loading, setLoading] = useState(false);
 
   const fetchData = useCallback(async () => {
+    setLoading(true);
     const response = (await getDragon(params.id)).data;
     const data = {...response, formattedDate: dateConverter(response.createdAt)};
     setDragon(data);
+    setLoading(false);
   }, [params]);
 
   useEffect(() => {
@@ -110,8 +113,11 @@ export const DragonDetails: React.FC = () => {
     }
   }, [dragon]);
 
+  const verifyLoading = useMemo(() => loading && <Loader />, [loading]);
+
   return (
     <>
+      {verifyLoading}
       <ToastContainer
         autoClose={5000}
         closeOnClick

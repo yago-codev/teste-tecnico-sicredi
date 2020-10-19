@@ -4,6 +4,7 @@ export { Content } from './Content';
 export { Header } from './Header';
 export { Input } from './Input';
 export { Layout } from './Layout';
+export { Loader } from './Loader';
 export { Modal } from './Modal';
 export { Table } from './Table';
 export { TextArea } from './TextArea';
