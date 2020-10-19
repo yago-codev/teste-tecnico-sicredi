@@ -46,7 +46,7 @@ interface IFormData {
 export const DragonDetails: React.FC = () => {
   const { params } = useRouteMatch<IDetailsParams>();
   const formRef = useRef<FormHandles>(null);
-  const [dragon, setDragon] = useState<IDragons>();
+  const [dragon, setDragon] = useState<IDragons>({} as IDragons);
 
   const fetchData = useCallback(async () => {
     const response = (await getDragon(params.id)).data;
@@ -91,6 +91,25 @@ export const DragonDetails: React.FC = () => {
 
   const checkParamIdForTheTitle = useMemo(() => params.id ? 'Editar' : 'Criar', [params.id]);
 
+  const checkParamIdForThePlaceholderAndValueInputs = useMemo(() => {
+    if (dragon!.name) {
+      return dragon!.name;
+
+    } else if (dragon!.type) {
+      return dragon!.type;
+
+    } else if (dragon!.createdAt) {
+      return dragon!.formattedDate;
+
+    } else if (dragon!.histories) {
+      return dragon!.histories[0];
+    }
+
+    else {
+      return '';
+    }
+  }, [dragon]);
+
   return (
     <>
       <ToastContainer
@@ -122,7 +141,7 @@ export const DragonDetails: React.FC = () => {
                   name="name"
                   iconSize={20}
                   icon={FiEdit}
-                  placeholder={dragon?.name}
+                  placeholder={checkParamIdForThePlaceholderAndValueInputs}
                 />
               </DragonDetailsInputContainer>
 
@@ -132,7 +151,7 @@ export const DragonDetails: React.FC = () => {
                   name="type"
                   iconSize={20}
                   icon={FiFeather}
-                  placeholder={dragon?.type}
+                  placeholder={checkParamIdForThePlaceholderAndValueInputs}
                 />
               </DragonDetailsInputContainer>
 
@@ -143,7 +162,7 @@ export const DragonDetails: React.FC = () => {
                     name="createdAt"
                     iconSize={20}
                     icon={FiCalendar}
-                    value={dragon?.formattedDate}
+                    value={checkParamIdForThePlaceholderAndValueInputs}
                   />
                 </DragonDetailsInputContainer>
               )}
@@ -156,7 +175,7 @@ export const DragonDetails: React.FC = () => {
                   name="histories"
                   iconSize={20}
                   icon={FiBookOpen}
-                  placeholder={dragon?.histories}
+                  placeholder={checkParamIdForThePlaceholderAndValueInputs}
                 />
               </DragonDetailsTextAreaContainer>
             </DragonDetailsContentContainer>
